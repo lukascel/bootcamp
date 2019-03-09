@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TRENERZY</title>
+</head>
+<body>
+<header th:replace="fragments/header :: menu"></header>
+
+
+    <th:block th:text="${trainer.description}">
+    </th:block>
+
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

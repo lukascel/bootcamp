@@ -2,21 +2,19 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Bootcamp</title>
+    <title>administracja</title>
 </head>
 <body>
 <header th:replace="fragments/header :: menu"></header>
 
-<!--<span th:text="${lastName}"></span>-->
-<!--<span th:text="${firstName}"></span><br>-->
-<!--<span th:text="${wiek}"></span><br>-->
-
 <h1>
+    Zalogowałeś się jako: <br>
     <span th:text="${firstName} + ' ' + ${lastName}"></span>! <br>
-    Witaj na bootcampie!
+    Witaj w sekcji administratora!
 </h1>
 
+<a href="/admin/trenerzyadmin">trainers_admin</a>
+<br><br>
 <footer th:replace="fragments/footer :: footer"></footer>
-
 </body>
 </html>

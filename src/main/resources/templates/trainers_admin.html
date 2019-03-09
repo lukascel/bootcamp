@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TrenerzyAdmin</title>
+</head>
+<body>
+<header th:replace="fragments/header :: menu"></header>
+<h1>
+    Sekcja zarządzania kadrą trenerską:
+</h1>
+
+<a href="/admin/dodaj-trenera-do-bazy">DODAJ NOWEGO TRENERA</a><br><br>
+
+<span th:if="${idRemoved}">Trener usunięty!<br>
+    Dziękujemy!<br><br></span>
+
+<table style="width=100%">
+    <tr>
+        <th>IMIĘ:</th>
+        <th>NAZWISKO:</th>
+        <th>STAWKA:</th>
+        <th>OPIS:</th>
+        <th>AKCJA:</th>
+    </tr>
+    <tr th:each="trainer : ${trainersList}">
+        <td><span th:text="${trainer.firstName}"></span></td>
+        <td><span th:text="${trainer.lastName}"></span></td>
+        <td><span th:text="${trainer.salary}"></span></td>
+        <td><span th:text="${trainer.description}"></span>!</td>
+        <td><a th:href="@{'/admin/usun-trenera/' + ${trainer.id}}" method="get">usun</a></td>
+        <td><a th:href="@{'/admin/edytuj-trenera/' + ${trainer.id}}" method="get">edytuj</a></td>
+
+    </tr>
+</table>
+
+<!--<li th:each="trainer : ${trainersList}">-->
+    <!--<a th:href="'/trenerzy/'+ ${trainer.id}" + th:text="${trainer.firstName} + ' '  + ${trainer.lastName}"></a>-->
+<!--</li>-->
+
+<br><br>
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

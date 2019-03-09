@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj Trenera</title>
+</head>
+<body>
+    <header th:replace="fragments/header :: menu"></header>
+
+    <h1>DODAJ TRENERA</h1>
+
+    <span th:if="${isSentTrainer}">Dodano trenera!<br>
+    Dziękujemy!<br><br></span>
+
+    <form th:action="@{/admin/dodaj_trenera}" method="post" th:object="${trainer}">
+        <label for="firstName">Imię trenera: </label>
+        <input id="firstName" type="text" th:field="*{firstName}"/><br><br>
+
+        <label for="lastName">Nazwisko trenera: </label>
+        <input id="lastName" type="text" th:field="*{lastName}"/><br><br>
+
+        <label for="salary">Pensja: </label>
+        <input id="salary" type="number" th:field="*{salary}"/><br><br>
+
+        <label for="description">Opis trenera: </label>
+        <textarea id="description" cols="50" rows="10" th:field="*{description}"></textarea><br><br>
+
+        <input type="hidden" th:field="*{id}"/>
+
+        <input type="submit" value="dodaj"/><br><br>
+        <input type="reset" value="wyczyść"><br><br>
+    </form>
+
+    <footer th:replace="fragments/footer :: stopka"></footer>
+</body>
+</html>
