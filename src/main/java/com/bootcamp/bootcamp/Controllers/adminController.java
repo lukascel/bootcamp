@@ -8,8 +8,12 @@ import com.bootcamp.bootcamp.Services.TrainersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -50,11 +54,17 @@ public class adminController {
     }
 
     @PostMapping("/dodaj_trenera")
-    public String addNewTrainer(@ModelAttribute Trainers trainer, Model model){
-        model.addAttribute("isSentTrainer", true);
-        model.addAttribute("trainer", new Trainers());
-        System.out.println(trainer);
+    public String addNewTrainer(@Valid @ModelAttribute(name = "trainer") Trainers trainer, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()) {
+            List<ObjectError> errors = bindingResult.getAllErrors();
+            errors.forEach(err -> System.out.println(err.getDefaultMessage()));
+           // model.addAttribute("trainer", trainer);
+            return "trainers_admin_add";
+        }
         adminService.saveTrainer(trainer);
+        model.addAttribute("isSentTrainer", true);
+//        model.addAttribute("trainer", new Trainers());
+        model.addAttribute("trainerListOrdered", trainersService.getOrderedAllTrainers());
         return "trainers_admin";
     }
 
