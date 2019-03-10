@@ -3,11 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Kursy</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <header th:replace="fragments/header :: menu"></header>
 
 <h1>KURSY DOSTĘPNE W NASZEJ OFERCIE:</h1>
+
+    <table th:class="table">
+        <tr>
+            <th>NAZWA KURSU:</th>
+            <th>OPIS KURSU:</th>
+            <th>TECHNOLOGIE:</th>
+            <th>ACTION:</th>
+        </tr>
+        <tr th:each="course : ${courseList}">
+            <td><span th:text="${course.name}"></span></td>
+            <td><span th:text="${course.description}"></span></td>
+            <td><span th:text="${course.technology}"></span></td>
+
+            <td><a th:href="@{'/admin/edytuj-kurs/' + ${course.id}}" method="get">edytuj</a></td>
+
+        </tr>
+    </table>
 
     <footer th:replace="fragments/footer :: footer"></footer>
 </body>

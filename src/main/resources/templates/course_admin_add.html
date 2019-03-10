@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj kurs</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+    <header th:replace="fragments/header :: menu"></header>
+    <h1>DODAJ KURS</h1>
+
+    <span th:if="${isSentCourse}">Dodano trenera!<br>
+    Dziękujemy!<br><br></span>
+
+    <form th:action="@{/admin/dodaj_kurs}" method="post" th:object="${course}">
+        <!--w pętli wyświetlenie wszystkich info z validacji:
+        <p th:errors="*" class="error"></p>
+        -->
+
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="err"></p>
+        <label for="name">Nazwa kursu: </label>
+        <input id="name" type="text" th:field="*{name}" th:class="${#fields.hasErrors('name')} ? error"/><br><br>
+
+        <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="err"></p>
+        <label for="description">Opis kursu: </label>
+        <textarea id="description" cols="50" rows="10" th:field="*{description}" th:class="${#fields.hasErrors('description')} ? error"></textarea><br><br>
+
+        <p th:if="${#fields.hasErrors('technology')}" th:errors="*{technology}" class="err"></p>
+        <label for="technology">Technologie: </label>
+        <input id="technology" type="text" th:field="*{technology}" th:class="${#fields.hasErrors('technology')} ? error"/><br><br>
+
+
+        <input type="hidden" th:field="*{id}"/>
+
+        <input type="submit" value="dodaj"/><br><br>
+        <input type="reset" value="wyczyść"><br><br>
+    </form>
+
+    <footer th:replace="fragments/footer :: stopka"></footer>
+</body>
+</html>

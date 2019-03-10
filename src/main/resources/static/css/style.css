@@ -1,2 +1,36 @@
+body {
+background-color: antiquewhite;
+}
+
 .err {
-color:red}
+color:red
+}
+
+textarea.error,
+
+input.error {
+    border: 2px solid red;
+    border-radius: 4px;
+}
+
+
+.table {
+    border-spacing: 0px;
+    border: 1px solid black;
+    }
+th{
+    background-color: #4CAF50;
+    color: white;
+}
+tr{
+    height: 50px;
+    padding: 15px;
+    }
+tr:hover{background-color: #f5f5f5;
+    }
+tr:nth-child(even) {background-color: #f2f2f2;}
+td{
+    height: 30px;
+    padding: 15px;
+    border-bottom: 1px solid black;
+    }

@@ -14,8 +14,7 @@ public class AdminService {
     @Autowired
     TrainerRepository trainerRepository;
 
-    public void saveTrainer(Trainers trainer){
-        trainerRepository.save(trainer);
+    public void saveTrainer(Trainers trainer){ trainerRepository.save(trainer);
     }
 
     public void removeTrainer(long id){

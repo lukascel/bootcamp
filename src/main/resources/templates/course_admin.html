@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kursy</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header th:replace="fragments/header :: menu"></header>
+<h1>SEKCJA ZARZĄDZANIA KURSAMI</h1>
+
+<a href="/admin/dodaj-kurs-do-bazy">DODAJ NOWY KURS</a><br><br>
+
+<span th:if="${isSentCourse}">Kurs dodany!<br>
+    Dziękujemy!<br><br></span>
+
+<table th:class="table">
+    <tr>
+        <th>NAZWA KURSU:</th>
+        <th>OPIS KURSU:</th>
+        <th>TECHNOLOGIE:</th>
+        <th>ACTION:</th>
+    </tr>
+    <tr th:each="course : ${courseList}">
+        <td><span th:text="${course.name}"></span></td>
+        <td><span th:text="${course.description}"></span></td>
+        <td><span th:text="${course.technology}"></span></td>
+
+        <td><a th:href="@{'/admin/edytuj-kurs/' + ${course.id}}" method="get">edytuj</a></td>
+
+    </tr>
+</table>
+
+
+<footer th:replace="fragments/footer :: stopka"></footer>
+
+</body>
+</html>

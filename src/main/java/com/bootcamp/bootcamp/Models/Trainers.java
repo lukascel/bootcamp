@@ -10,9 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 
 @Service
 @Entity
@@ -26,7 +24,8 @@ public class Trainers {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //strategy - robi mi tutaj z ID autoincrement.
     private long id;
 
-    @NotEmpty (message = "{com.bootcamp.bootcamp.Models.Trainers.firstName.NotEmpty}")
+    @NotBlank //mówi że nie moze być spacji ale tutaj można go usunąć bo Patern mówi że muszą być litery!!
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Błędne imię")
     private String firstName;
 
     @NotEmpty (message = "{com.bootcamp.bootcamp.Models.Trainers.lastName.NotEmpty}")

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>administracja</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <header th:replace="fragments/header :: menu"></header>
@@ -13,7 +14,9 @@
     Witaj w sekcji administratora!
 </h1>
 
-<a href="/admin/trenerzyadmin">trainers_admin</a>
+<a href="/admin/trenerzyadmin">trainers_admin</a><br>
+<a href="/admin/courseadmin">kursy_admin</a>
+
 <br><br>
 <footer th:replace="fragments/footer :: footer"></footer>
 </body>
