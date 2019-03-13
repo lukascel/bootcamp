@@ -35,6 +35,7 @@ public class User {
 
     @NotBlank
     @Column(unique = true)
+    @Pattern(regexp = "^[a-zA-Z.|_|-]+[@][a-z]+[.][a-z]+$")
     private String email;
 
 

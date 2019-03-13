@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj użytkownika!</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+    <header th:replace="fragments/header :: menu"></header>
+
+    <h1>Zapisz się na kurs!</h1>
+
+    <span th:if="$(isSentUser)">Gratulacje! Dokonałeś zapisu! <br>
+        W najbliższym czasie skontaktuje się z Tobą przedstawiciel naszej formy</span>
+
+    <form th:action="@{/kursy/dodaj-uzytkownika-do-kursu}" method="post" th:object="${user}">
+
+        <label for="name">Wskaż interesujacy Cię kurs i jego edycję:</label>
+        <select th:field="*{course}" id="name">
+            <option th:each="kurs:${courses}" th:value="${kurs.id}" th:text="${kurs.name}"></option>
+        </select><br><br>
+
+        <!--<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="err"></p>-->
+        <label for="imie">Podaj imię: </label>
+        <input id="imie" type="text" th:field="*{imie}"/><br><br>
+        <!--th:class="${#fields.hasErrors('firstName')} ? error"-->
+
+        <label for="nazwisko">Podaj nazwisko: </label>
+        <input id="nazwisko" type="text" th:field="*{nazwisko}"/><br><br>
+
+        <label for="telefon">Podaj numer telefonu: </label>
+        <input id="telefon" type="number" th:field="*{telefon}"/><br><br>
+
+        <label for="email">Podaj adres e-mail: </label>
+        <input id="email" type="text" th:field="*{email}"/><br><br>
+
+    </form>
+
+    <footer th:replace="fragments/footer :: stopka"></footer>
+</body>
+</html>
