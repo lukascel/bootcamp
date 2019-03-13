@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EDYCJE</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header th:replace="fragments/header :: menu"></header>
+<h1>SEKCJA ZARZĄDZANIA EDYCJAMI</h1>
+
+<a href="/admin/dodaj-edycje-kursu-do-bazy">DODAJ NOWĄ EDYCJĘ</a><br><br>
+
+<span th:if="${isSentCourseEdition}">Edycja Kursu dodana!<br>
+    Dziękujemy!<br><br></span>
+
+<table th:class="table">
+    <tr>
+        <th>NAZWA:</th>
+        <th>ROZPOCZĘCIE:</th>
+        <th>ZAKOŃCZENIE:</th>
+        <th>CENA:</th>
+        <th>TRENER:</th>
+        <th>LIMIT KURSANTÓW:</th>
+        <th>ACTION</th>
+    </tr>
+    <tr th:each="edition : ${editionList}">
+        <td><span th:text="${edition.course.name}"></span></td>
+        <td><span th:text="${edition.startDate}"></span></td>
+        <td><span th:text="${edition.endDate}"></span></td>
+        <td><span th:text="${edition.price}"></span></td>
+        <td><span th:text="${edition.trainer.firstName} + ' ' + ${edition.trainer.lastName}"></span></td>
+        <td><span th:text="${edition.membersLimit}"></span></td>
+        <td><a th:href="@{'/admin/edytuj-edycje/' + ${edition.id}}" method="get">edytuj</a></td>
+
+    </tr>
+</table>
+
+
+<footer th:replace="fragments/footer :: stopka"></footer>
+
+
+</body>
+</html>

@@ -5,13 +5,13 @@
 <body>
 <nav th:fragment="menu">
     <ul>
-        <li><a href = "/o-nas">o nas</a></li>
-        <li><a href = "/">home</a></li>
-        <li><a href = "/trenerzy">trenerzy</a></li>
-        <li><a href = "/kontakt">kontakt</a></li>
-        <li><a href = "/kursy">courses</a></li>
-        <li><a href = "/admin">admin</a></li>
-        <li sec:authorize="isAuthenticated()"><a href = "/logout">wyloguj</a></li>
+        <li><a href = "/o-nas">O NAS</a></li>
+        <li><a href = "/">HOME</a></li>
+        <li><a href = "/trenerzy">TRENERZY</a></li>
+        <li><a href = "/kontakt">KONTAKT</a></li>
+        <li><a href = "/kursy">DOSTĘPNE KURSY</a></li>
+        <li><a href = "/admin">ADMIN</a></li>
+        <li sec:authorize="isAuthenticated()"><a href = "/logout">WYLOGUJ</a></li>
 
         <!-- stara metoda zrobienia wylogowywania:
         <li th:block="${#a <hentication.name}">-->

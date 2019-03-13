@@ -4,15 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 
 @Service
-
 @Entity
 @Data
 @Builder
@@ -27,12 +28,13 @@ public class CourseEdition {
 
     @ManyToOne //może byc wiele edycji konkretnego kursu
     @JoinColumn(name = "course_id")
+    @NotNull
     private Course course; //odwołuję się do modelu Course bo stamtąd biorę to ID kursu
 
-    @NotBlank
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
-    @NotBlank
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
     @Positive
@@ -43,7 +45,13 @@ public class CourseEdition {
 
     @ManyToOne
     @JoinColumn(name = "mode_id")
+    @NotNull
     private Mode mode;
+
+    @ManyToOne
+    @JoinColumn(name = "trainer_id")
+    @NotNull
+    private Trainers trainer;
 
     private boolean active;
 }

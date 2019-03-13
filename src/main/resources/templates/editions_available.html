@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dostępne kursy</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header th:replace="fragments/header :: menu"></header>
+
+<table th:class="table">
+    <tr>
+        <th>NAZWA:</th>
+        <th>OPIS:</th>
+        <th>ROZPOCZĘCIE:</th>
+        <th>ZAKOŃCZENIE:</th>
+        <th>CENA:</th>
+        <th>TRENER:</th>
+        <th>TRYB:</th>
+        <th>STATUS:</th>
+        <th>AKCJA</th>
+    </tr>
+    <tr th:each="edition : ${courseEdition}">
+        <td><span th:text="${edition.course.name}"></span></td>
+        <td><span th:text="${edition.course.description}"></span></td>
+        <td><span th:text="${edition.startDate}"></span></td>
+        <td><span th:text="${edition.endDate}"></span></td>
+        <td><span th:text="${edition.price}"></span></td>
+        <td><span th:text="${edition.trainer.firstName} + ' ' + ${edition.trainer.lastName}"></span></td>
+        <td><span th:text="${edition.mode.courseMode}"></span></td>
+        <td><span th:text="${edition.active} ? 'Rekrutacja trwa!' : 'Rekrutacja zakończona!'"></span></td>
+        <td><a th:href="@{'/kursy/zapisz'}" th:if="${edition.active}" method="get">zapisz</a></td>
+
+    </tr>
+</table>
+
+<footer th:replace="fragments/footer :: stopka"></footer>
+
+</body>
+</html>

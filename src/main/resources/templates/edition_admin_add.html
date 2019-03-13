@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj Edycję</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<header th:replace="fragments/header :: menu"></header>
+
+<h1>DODAJ EDYCJĘ KURSU</h1>
+
+<span th:if="${isSentCourseEdition}">Dodano Edycję!<br>
+    Dziękujemy!<br><br></span>
+
+<form th:action="@{/admin/dodaj_edycje_kursu}" method="post" th:object="${courseEdition}">
+
+    <!--dodawanie rozwijalnej listy dostepnych kursów:-->
+    <label for="name">Nazwa kursu:</label>
+    <select th:field="*{course}" id="name">
+        <option th:each="kurs:${courses}" th:value="${kurs.id}" th:text="${kurs.name}"></option>
+    </select><br><br>
+
+<!--dodawanie rozwijalnej listy dostępnych edycji:-->
+    <!--mode poniżej - dowolne, musi być zgodne z tym mode które w 2giej linijce mam przypisane do id.-->
+
+    <label for="mode">Tryb:</label>
+    <select th:field="*{mode}" id="mode">
+        <!--pozyższy *{mode} pochodzi z modelu CourseEdition
+        moniższe elem - dowolna nazwa, jak w pętli for, a {mode} to nazwa z Controlera-->
+        <option th:each="elem:${mode}" th:value="${elem.id}" th:text="${elem.courseMode}"></option>
+    </select><br><br>
+
+<!--dodawanie rozwijalnej listy dostępnych w bazie trenerów:-->
+    <label for="trainers">Trener:</label>
+    <select th:field="*{trainer}" id="trainers">
+        <option th:each="trenera:${trener}" th:value="${trenera.id}" th:text="${trenera.firstName} + ' ' + ${trenera.lastName}"></option>
+    </select><br><br>
+
+    <!--<p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" class="err"></p>-->
+    <label for="startDate">Data rozpoczęcia: </label>
+    <input id="startDate" type="date" th:field="*{startDate}" ><br><br>
+    <!--th:class="${#fields.hasErrors('startDate')} ? error"/-->
+
+    <!--<p th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}" class="err"></p>-->
+    <label for="endDate">Data zakończenia: </label>
+    <input id="endDate" type="date" th:field="*{endDate}" ><br><br>
+    <!--th:class="${#fields.hasErrors('endDate')} ? error"/-->
+
+    <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="err"></p>
+    <label for="price">Cena: </label>
+    <input id="price" type="number" th:field="*{price}" th:class="${#fields.hasErrors('price')} ? error"/><br><br>
+
+    <p th:if="${#fields.hasErrors('membersLimit')}" th:errors="*{membersLimit}" class="err"></p>
+    <label for="membersLimit">Liczba miejsc: </label>
+    <input id="membersLimit" type="number" th:field="*{membersLimit}" th:class="${#fields.hasErrors('membersLimit')} ? error"/><br><br>
+
+    <input type="hidden" th:field="*{id}"/>
+
+    <input type="submit" value="dodaj"/><br><br>
+    <input type="reset" value="wyczyść"><br><br>
+</form>
+
+<footer th:replace="fragments/footer :: stopka"></footer>
+
+</body>
+</html>

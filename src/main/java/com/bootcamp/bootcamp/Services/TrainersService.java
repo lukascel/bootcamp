@@ -10,22 +10,29 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TrainersService{
+public class TrainersService {
 
     @Autowired
     private TrainerRepository trainerRepository;
 
 
-public List<Trainers> getAllTrainers(){
-    List<Trainers> trainersList = trainerRepository.findAll();
-    return trainersList;
-}
+    public List<Trainers> getAllTrainers() {
+        List<Trainers> trainersList = trainerRepository.findAll();
+        return trainersList;
+    }
 
-    public List<Trainers> getOrderedAllTrainers(){
+    public List<Trainers> getOrderedAllTrainers() {
         List<Trainers> trainersOrderedList = trainerRepository.findAllByOrderByLastName();
-    return trainersOrderedList;
-}
+        return trainersOrderedList;
+    }
 
+    public void saveTrainer(Trainers trainer) {
+        trainerRepository.save(trainer);
+    }
+
+    public void removeTrainer(long id) {
+        trainerRepository.deleteById(id);
+    }
 //        List<Trainers> trainersList = new LinkedList<>();
 //        Trainers trainer1 = new Trainers();
 //        trainer1.setId(1);
@@ -51,9 +58,9 @@ public List<Trainers> getAllTrainers(){
 //
 
 
-public Optional<Trainers> getTreiner(long id){
-    Optional<Trainers> trainers = trainerRepository.findById(id);
-            return trainers;
+    public Optional<Trainers> getTreiner(long id) {
+        Optional<Trainers> trainers = trainerRepository.findById(id);
+        return trainers;
     }
 
 }

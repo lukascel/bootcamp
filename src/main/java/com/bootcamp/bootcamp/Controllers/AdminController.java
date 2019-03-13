@@ -1,10 +1,11 @@
 package com.bootcamp.bootcamp.Controllers;
 
-import com.bootcamp.bootcamp.Models.Contact;
 import com.bootcamp.bootcamp.Models.Course;
+import com.bootcamp.bootcamp.Models.CourseEdition;
 import com.bootcamp.bootcamp.Models.Trainers;
-import com.bootcamp.bootcamp.Repository.TrainerRepository;
-import com.bootcamp.bootcamp.Services.AdminService;
+import com.bootcamp.bootcamp.Repository.CourseModeRepository;
+import com.bootcamp.bootcamp.Services.CourseEditionService;
+import com.bootcamp.bootcamp.Services.CourseModeService;
 import com.bootcamp.bootcamp.Services.CourseService;
 import com.bootcamp.bootcamp.Services.TrainersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +22,17 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
-public class adminController {
+public class AdminController {
 
-    @Autowired
-    private TrainerRepository trainerRepository;
     @Autowired
     private TrainersService trainersService;
     @Autowired
-    private AdminService adminService;
-    @Autowired
     private CourseService courseService;
+    @Autowired
+    private CourseEditionService courseEditionService;
+    @Autowired
+    private CourseModeService courseModeService;
+
 
     @GetMapping("")
     public String admin(@RequestParam(name = "imie", defaultValue = "Łukasz", required = false) String firstName,
@@ -66,7 +68,7 @@ public class adminController {
             // model.addAttribute("trainer", trainer);
             return "trainers_admin_add";
         }
-        adminService.saveTrainer(trainer);
+        trainersService.saveTrainer(trainer);
         model.addAttribute("isSentTrainer", true);
 //        model.addAttribute("trainer", new Trainers());
         model.addAttribute("trainerListOrdered", trainersService.getOrderedAllTrainers());
@@ -75,7 +77,7 @@ public class adminController {
 
     @GetMapping("/usun-trenera/{id}")
     public String removeTrainer(@PathVariable long id, Model model) {
-        adminService.removeTrainer(id);
+        trainersService.removeTrainer(id);
         model.addAttribute("isRemoved", true);
         model.addAttribute("trainersList", trainersService.getOrderedAllTrainers());
         return "trainers_admin";
@@ -119,5 +121,42 @@ public class adminController {
         Optional<Course> course = courseService.getCourse(id);
         model.addAttribute("course", course.get());
         return "course_admin_add";
+    }
+
+
+    @GetMapping("/edycja")
+    public String adminShowEdition(Model model) {
+        model.addAttribute("editionList", courseEditionService.getAllEditions());
+        return "edition_admin";
+    }
+
+    @GetMapping("/dodaj-edycje-kursu-do-bazy")
+    public String addCourseEditionToDB(Model model) {
+        model.addAttribute("courseEdition", new CourseEdition());
+        model.addAttribute("courses", courseService.getAllCourses());
+        //model.addAttribute("mode", courseEditionService.getAllEditions());
+        model.addAttribute("mode", courseModeService.getAllModes());
+        model.addAttribute("trener", trainersService.getAllTrainers());
+        return "edition_admin_add";
+    }
+
+    @PostMapping("/dodaj_edycje_kursu")
+    public String addNewEditionCourse(@Valid @ModelAttribute CourseEdition courseEdition, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            List<ObjectError> errors = bindingResult.getAllErrors();
+            errors.forEach(err -> System.out.println(err.getDefaultMessage()));
+            return "edition_admin_add";
+        }
+        courseEditionService.saveCourseEdition(courseEdition);
+        model.addAttribute("isSentCourseEdition", true);
+        model.addAttribute("editionList", courseEditionService.getAllEditions());
+        return "edition_admin";
+    }
+
+    @GetMapping("edytuj-edycje/{id}")
+    public String editEdition(@PathVariable long id, Model model) {
+        Optional<CourseEdition> courseEdition = courseEditionService.getCourseEdition(id);
+        model.addAttribute("courseEdition", courseEdition.get());
+        return "edition_admin_add";
     }
 }
