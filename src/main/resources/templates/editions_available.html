@@ -26,10 +26,17 @@
         <td><span th:text="${edition.startDate}"></span></td>
         <td><span th:text="${edition.endDate}"></span></td>
         <td><span th:text="${edition.price}"></span></td>
-        <td><span th:text="${edition.trainer.firstName} + ' ' + ${edition.trainer.lastName}"></span></td>
+        <td>
+            <a th:href="@{'/trenerzy/' + ${edition.trainer.id}}" method="get">
+                <span th:text="${edition.trainer.firstName} + ' ' + ${edition.trainer.lastName}"></span></a></td>
+        <!--Poniżej zakomentowane wyświetlanie tylko imienia i nazwiska terenera, bez podlinkowania:-->
+        <!--<td><span th:text="${edition.trainer.firstName} + ' ' + ${edition.trainer.lastName}"></span></td>-->
         <td><span th:text="${edition.mode.courseMode}"></span></td>
         <td><span th:text="${edition.active} ? 'Rekrutacja trwa!' : 'Rekrutacja zakończona!'"></span></td>
         <td><a th:href="@{'/kursy/zapisz'}" th:if="${edition.active}" method="get">zapisz</a></td>
+
+
+
 
     </tr>
 </table>

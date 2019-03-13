@@ -29,7 +29,10 @@
         <td><span th:text="${edition.startDate}"></span></td>
         <td><span th:text="${edition.endDate}"></span></td>
         <td><span th:text="${edition.price}"></span></td>
-        <td><span th:text="${edition.trainer.firstName} + ' ' + ${edition.trainer.lastName}"></span></td>
+        <td>
+            <a th:href="@{'/admin/edytuj-trenera/' + ${edition.trainer.id}}" method="get">
+                <span th:text="${edition.trainer.firstName} + ' ' + ${edition.trainer.lastName}"></span></a></td>
+
         <td><span th:text="${edition.membersLimit}"></span></td>
         <td><a th:href="@{'/admin/edytuj-edycje/' + ${edition.id}}" method="get">edytuj</a></td>
 
