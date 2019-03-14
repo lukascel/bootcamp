@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Service
@@ -37,6 +38,12 @@ public class User {
     @Column(unique = true)
     @Pattern(regexp = "^[a-zA-Z.|_|-]+[@][a-z]+[.][a-z]+$")
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @NotNull
+    private User user;
+
 
 
 

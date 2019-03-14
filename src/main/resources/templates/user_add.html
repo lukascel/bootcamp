@@ -17,7 +17,7 @@
     <form th:action="@{/kursy/dodaj-uzytkownika-do-kursu}" method="post" th:object="${user}">
 
         <label for="name">Wskaż interesujacy Cię kurs i jego edycję:</label>
-        <select th:field="*{course}" id="name">
+        <select th:field="*{courses}" id="name">
             <option th:each="kurs:${courses}" th:value="${kurs.id}" th:text="${kurs.name}"></option>
         </select><br><br>
 

@@ -2,6 +2,7 @@ package com.bootcamp.bootcamp.Controllers;
 
 import com.bootcamp.bootcamp.Models.Trainers;
 import com.bootcamp.bootcamp.Models.User;
+import com.bootcamp.bootcamp.Services.CourseModeService;
 import com.bootcamp.bootcamp.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ public class UserController {
 
 @Autowired
     private UserService userService;
+private CourseModeService courseModeService;
 
     @GetMapping("/kursy/zapisz-uzytkownika-do-bazy")
         public String addUserToDB(Model model){
@@ -36,7 +38,8 @@ public class UserController {
         }
         userService.saveUser(user);
         model.addAttribute("isSentUser", true);
-        //model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("courses", courseModeService.getAllModes());
+//        model.addAttribute("users", userService.getAllUsers());
         return "editions_available";
     }
 

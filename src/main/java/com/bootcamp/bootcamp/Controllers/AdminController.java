@@ -157,6 +157,9 @@ public class AdminController {
     public String editEdition(@PathVariable long id, Model model) {
         Optional<CourseEdition> courseEdition = courseEditionService.getCourseEdition(id);
         model.addAttribute("courseEdition", courseEdition.get());
+        model.addAttribute("courses", courseService.getAllCourses());
+        model.addAttribute("mode", courseModeService.getAllModes());
+        model.addAttribute("trener", trainersService.getAllTrainers());
         return "edition_admin_add";
     }
 }
