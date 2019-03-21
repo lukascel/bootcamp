@@ -59,12 +59,12 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             List<ObjectError> errors = bindingResult.getAllErrors();
             errors.forEach(err -> System.out.println(err.getDefaultMessage()));
-            model.addAttribute("edition", courseEditionService.getCourseEdition(id).get());
+            model.addAttribute("edition", courseEditionService.getActiveCourseEdition(id));
             return "user_add";
         }
         userService.saveUser(user);
         model.addAttribute("isSentUser", true);
-        model.addAttribute("edition", courseEditionService.getCourseEdition(id).get());
+        model.addAttribute("edition", courseEditionService.getActiveCourseEdition(id));
         model.addAttribute("user", User.builder().build());
 
         return "editions_available";

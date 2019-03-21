@@ -20,14 +20,19 @@ public class UserService {
     private UserRepository userRepository;
 @Autowired
     private RoleRepository roleRepository;
+@Autowired
+    private RoleService roleService;
 
     public void saveUser (User user){
 
-        //tutaj muszę ustawić rolę i hasło! dwie kolejne linijki to stała służąca do kodowania hasła.
+        //tutaj muszę ustawić rolę i hasło! dwie kolejne linijki - kodowanie hasła.
         PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        Role role = roleRepository.findByRole("user");
+
+        Role role = roleService.getRole("user");
+
         user.setRole(role);
+
         userRepository.save(user);
     }
 
