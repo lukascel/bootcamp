@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj użytkownika!</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<header th:replace="fragments/header :: menu"></header>
+
+
+    <h1>Zaloguj się:</h1>
+
+    <form th:action="@{/logowanie}" method="post">
+        <!--username i password - domyślne name. Gdybm chciał to zmienić w securityConfigu-->
+        <input type ="text" input name="username" placeholder="e-mail"/> <br />
+        <input type ="password" inpyt name="password" placeholder="hasło"/> <br />
+        <input type ="submit" value="zaloguj"/>
+    </form>
+
+
+<footer th:replace="fragments/footer :: stopka"></footer>
+</body>
+</html>

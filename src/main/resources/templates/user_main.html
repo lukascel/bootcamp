@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel użytkownika</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+    <header th:replace="fragments/header :: menu"></header>
+
+        <h1>Witaj w panelu użytkownika</h1><br><br>
+
+    <table th:class="table">
+        <tr>
+            <th>NAZWA:</th>
+            <th>TRYB:</th>
+            <th>ROZPOCZĘCIE:</th>
+            <th>ZAKONCZENIE:</th>
+
+        </tr>
+        <tr th:each="edition : ${editionList}">
+            <td><span th:text="${edition.course.name}"></span></td>
+            <td><span th:text="${edition.mode}"></span></td>
+            <td><span th:text="${edition.startDate}"></span></td>
+            <td><span th:text="${edition.endDate}"></span></td>
+        </tr>
+    </table>
+
+
+    <footer th:replace="fragments/footer :: stopka"></footer>
+</body>
+</html>

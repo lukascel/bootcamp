@@ -26,4 +26,10 @@ public class CourseEditionService {
         Optional<CourseEdition> courseEdition = courseEditionRepository.findById(id);
         return courseEdition;
     }
+
+    public CourseEdition getActiveCourseEdition (long id) {
+        CourseEdition activeCourseEdition = courseEditionRepository.getEdition(id);
+        return activeCourseEdition;
+    }
+
 }

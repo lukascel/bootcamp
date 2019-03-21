@@ -33,7 +33,7 @@
         <!--<td><span th:text="${edition.trainer.firstName} + ' ' + ${edition.trainer.lastName}"></span></td>-->
         <td><span th:text="${edition.mode.courseMode}"></span></td>
         <td><span th:text="${edition.active} ? 'Rekrutacja trwa!' : 'Rekrutacja zakończona!'"></span></td>
-        <td><a th:href="@{'/kursy/dodaj-uzytkownika-do-kursu'}" th:if="${edition.active}" method="get">zgłoś się na kurs</a></td>
+        <td><a th:href="@{'/kursy/zapisz-uzytkownika-do-bazy/'+${edition.id}}" th:if="${edition.active}" method="get">zgłoś się na kurs</a></td>
 
 
 

@@ -1,5 +1,8 @@
 package com.bootcamp.bootcamp.Controllers;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +27,25 @@ public class HomeController {
         model.addAttribute("lastName", lastName);
         model.addAttribute("wiek", wiek);
 
+        //pobieranie informacji o zalogowanym uzytkowniku:
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = auth.getPrincipal();
+        String username = null;
+
+        if(principal instanceof UserDetails) {
+
+        }
+
         //System.out.println("Witaj " + firstName + " " + lastName + " " + wiek);
 //        if (wiek>20) {
 //                return "redirect:o-nas";  // jesli podaje wiek 30 to przekierun na stronę inną - często wykorzystywane dla weryfikacji, czy udała sie płatnośc.
 //            }
         return "home";          // szuka pliku "home" w folderze templates.
+    }
+
+    @GetMapping("/logowanie")
+    public String loginForm() {
+        return "login_form";
     }
 
 

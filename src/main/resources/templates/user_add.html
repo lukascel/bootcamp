@@ -9,17 +9,21 @@
 <body>
     <header th:replace="fragments/header :: menu"></header>
 
-    <h1>Zapisz się na kurs!</h1>
+    <h1>Zapisz się na kurs!</span> </h1>
+<!--gdy nie ma edition wyswietli h2, jeśli jest edition to z form'a - edition-->
+    <h2 th:unless="${edition}">REKRUTACJA NA TEN KURS JEST ZAKOŃCZONA</h2>
 
-    <span th:if="$(isSentUser)">Gratulacje! Dokonałeś zapisu! <br>
+
+    <span th:if="${isSentUser}">Gratulacje! Dokonałeś zapisu! <br>
         W najbliższym czasie skontaktuje się z Tobą przedstawiciel naszej formy</span>
 
-    <form th:action="@{/kursy/dodaj-uzytkownika-do-kursu}" method="post" th:object="${user}">
+    <form th:action="@{'/kursy/dodaj-uzytkownika-do-kursu/'+${edition.id}}" method="post" th:object="${user}" th:if="${edition}">
 
-        <label for="name">Wskaż interesujacy Cię kurs i jego edycję:</label>
-        <select th:field="*{courses}" id="name">
-            <option th:each="kurs:${courses}" th:value="${kurs.id}" th:text="${kurs.name}"></option>
-        </select><br><br>
+        <label for="course">Wybrany kurs:</label>
+        <input id="course" type = "text" th:field="${edition.course.name}" disabled/><br><br>
+
+        <label for="edition">Wybrana edycja: </label>
+        <input id="edition" type = "text" th:value="${edition.startDate} + ' ' + '-' + ' ' + ${edition.endDate}" disabled/><br><br>
 
         <!--<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="err"></p>-->
         <label for="imie">Podaj imię: </label>
@@ -30,11 +34,18 @@
         <input id="nazwisko" type="text" th:field="*{nazwisko}"/><br><br>
 
         <label for="telefon">Podaj numer telefonu: </label>
-        <input id="telefon" type="number" th:field="*{telefon}"/><br><br>
+        <input id="telefon" type="text" th:field="*{telefon}"/><br><br>
 
         <label for="email">Podaj adres e-mail: </label>
         <input id="email" type="text" th:field="*{email}"/><br><br>
 
+        <label for="password">Hasło: </label>
+        <input id="password"type="text" th:field="*{password}"/><br><br>
+
+        <input type="hidden" th:field="*{id}"/>
+
+        <input type="submit" value="dodaj"/><br><br>
+        <input type="reset" value="wyczyść"><br><br>
     </form>
 
     <footer th:replace="fragments/footer :: stopka"></footer>

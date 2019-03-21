@@ -11,8 +11,15 @@
         <li><a href = "/kontakt">KONTAKT</a></li>
         <li><a href = "/kursy">DOSTĘPNE KURSY</a></li>
         <li><a href = "/admin">ADMIN</a></li>
-        <li sec:authorize="isAuthenticated()"><a href = "/logout">WYLOGUJ</a></li>
+        <li sec:authorize="!isAuthenticated() || hasAuthority('user')"><a href="/user">PANEL KURSANTA</a></li>
+        <li sec:authorize="isAuthenticated()"><a href="/logout">WYLOGUJ</a></li>
+    </ul>
 
+    <ul sec:authorize="hasAuthority('admin')">
+        <a href="/admin/trenerzyadmin">TRENERZY</a><br><br>
+        <a href="/admin/courseadmin">KURSY</a><br>
+        <a href="/admin/edycja">EDYCJE KURSÓW</a>
+    </ul>
         <!-- stara metoda zrobienia wylogowywania:
         <li th:block="${#a <hentication.name}">-->
             <!--<a href="/">Wyloguj mnie</a>-->
